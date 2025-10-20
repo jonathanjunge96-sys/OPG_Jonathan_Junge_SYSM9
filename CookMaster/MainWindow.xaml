@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CookMaster"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush x:Name="StartPic" ImageSource="/Bilder/a stylish logo desig.png"   />
+        </Grid.Background>
+            
+
+        <!-- Definiera rader -->
+        <Grid.RowDefinitions>
+            <RowDefinition  />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition/>
+            
+        </Grid.ColumnDefinitions>
+
+        <Button 
+            x:Name="LogIn"
+            Grid.Row="1" Grid.Column="0" 
+            Content="Logga in" Margin="100, 60, 100,60" 
+            FontSize="25" Background="Yellow"/>
+        <Button
+            x:Name="Register"
+            Grid.Row="1" Grid.Column="1" 
+            Content="Registrera dig" Margin="100, 60, 100,60" 
+            FontSize="25" Background="Yellow"/>
+           
+            
+            
+
+
+
 
     </Grid>
 </Window>
