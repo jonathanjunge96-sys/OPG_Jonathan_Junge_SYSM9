@@ -7,39 +7,41 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
+        <!-- Bakgrundsbild -->
         <Grid.Background>
-            <ImageBrush x:Name="StartPic" ImageSource="/Bilder/a stylish logo desig.png"   />
+            <ImageBrush ImageSource="/Bilder/a stylish logo desig.png" Stretch="UniformToFill"/>
         </Grid.Background>
-            
 
-        <!-- Definiera rader -->
+        <!-- Definierar rader och kolumner -->
         <Grid.RowDefinitions>
-            <RowDefinition  />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition/>
-            
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button 
-            x:Name="LogIn"
-            Grid.Row="1" Grid.Column="0" 
-            Content="Logga in" Margin="100, 60, 100,60" 
-            FontSize="25" Background="Yellow"/>
-        <Button
-            x:Name="Register"
-            Grid.Row="1" Grid.Column="1" 
-            Content="Registrera dig" Margin="100, 60, 100,60" 
-            FontSize="25" Background="Yellow"/>
-           
-            
-            
+        <!-- Innehåll i mitten av fönstret -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Width="300" Margin="20" Orientation="Vertical">
 
+            <!-- Användarnamn som jag binder -->
+            <TextBlock Text="Användarnamn:" FontSize="18" Margin="0,0,0,5"/>
+            <TextBox Text="{Binding Username}" Height="30" Margin="0,0,0,10"/>
 
+            <!-- Lösenord som binds -->
+            <TextBlock Text="Lösenord:" FontSize="18" Margin="0,0,0,5"/>
+            <PasswordBox Height="30" Margin="0,0,0,20"/>
 
-
+            <!-- Logga in-knapp -->
+            <Button x:Name="LogIn"
+                Content="Logga in"
+                Height="40" Background="Yellow"
+                FontSize="16" Command="{Binding LogIn}"/>
+        </StackPanel>
     </Grid>
+
 </Window>

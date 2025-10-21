@@ -7,3 +7,4 @@
         <managers:UserManager x:Key="UserManager" />
     </Application.Resources>
 </Application>
+

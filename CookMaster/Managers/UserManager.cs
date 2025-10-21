@@ -13,11 +13,11 @@ namespace CookMaster.Managers
 
     public class UserManager : INotifyPropertyChanged 
     {
-        private User _currentUser;
+        private User? _currentUser;
         private readonly List<User> _users = new();
         public UserManager() { }
 
-        public User CurrentUser
+        public User? CurrentUser
         {
             get => _currentUser;
             private set
@@ -46,7 +46,7 @@ namespace CookMaster.Managers
             CurrentUser = null;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void OnPropertyChanged(string propertyName)
         {
