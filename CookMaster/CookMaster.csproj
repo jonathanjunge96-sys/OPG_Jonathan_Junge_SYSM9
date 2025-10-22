@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Bilder\a stylish logo desig.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Bilder\a stylish logo desig.png" />
+  </ItemGroup>
+
 </Project>

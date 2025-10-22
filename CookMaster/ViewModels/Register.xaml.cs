@@ -12,17 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CookMaster.Views
+namespace CookMaster.ViewModels
 {
     /// <summary>
-    /// Interaction logic for MainContentView.xaml
+    /// Interaction logic for Register.xaml
     /// </summary>
-    public partial class MainContentView : UserControl
+    public partial class Register : Window
     {
-        public MainContentView()
+        public Register()
         {
             InitializeComponent();
-            
         }
     }
 }
