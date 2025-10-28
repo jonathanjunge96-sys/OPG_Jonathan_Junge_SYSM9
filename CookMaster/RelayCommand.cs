@@ -9,16 +9,37 @@ namespace CookMaster
 {
     public class RelayCommand : ICommand
     {
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object? parameter)
+        private readonly Action _execute; //returnerar metod utan värde
+        private readonly Func<bool> _canExecute; //returnerar bool
+        public RelayCommand(Action execute, Func<bool>? canExecute = null) //kontruktor med villkorskoll
+        { 
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+        public event EventHandler? CanExecuteChanged //snacka med hassan
         {
-            throw new NotImplementedException();
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+        public bool CanExecute(object? parameter) //true om det får köras
+        {
+            return _canExecute == null || _canExecute();
         }
 
+        
         public void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            _execute();
         }
     }
 }
+        
+
+
+
+        
+
+
+
+
+        
