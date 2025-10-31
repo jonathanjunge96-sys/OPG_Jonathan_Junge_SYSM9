@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace CookMaster
 {
-    public class RelayCommand : ICommand
+    public class RelayCommand : ICommand //kopplar knapp i UI till metoder in ViewModel
     {
         private readonly Action _execute; //returnerar metod utan värde
         private readonly Func<bool> _canExecute; //returnerar bool
@@ -16,7 +16,7 @@ namespace CookMaster
             _execute = execute;
             _canExecute = canExecute;
         }
-        public event EventHandler? CanExecuteChanged //snacka med hassan
+        public event EventHandler? CanExecuteChanged
         {
             add => CommandManager.RequerySuggested += value;
             remove => CommandManager.RequerySuggested -= value;

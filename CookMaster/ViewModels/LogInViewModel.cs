@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CookMaster.ViewModels
 {
-    public class LogInViewModel : INotifyPropertyChanged
+    public class LogInViewModel : ObservableObject
     {
         
 
