@@ -1,9 +1,11 @@
 ﻿using CookMaster.Managers;
+using CookMaster.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace CookMaster.ViewModels
@@ -14,6 +16,8 @@ namespace CookMaster.ViewModels
         public string? Password { get; set; }
         public ICommand? LogIn { get; set; }
         private readonly UserManager? _userManager;
+        public User? LoggedInUser { get; private set; } //egenskaper för niloggad användare
+
 
         public MainViewModel()
         {
@@ -24,15 +28,17 @@ namespace CookMaster.ViewModels
 
         private void ExecuteLogin()
         {
-            bool success = _userManager.Login(Username!, Password!);
-            if (success)
+            var user = _userManager.LoginUser(Username!, Password!);
+            if (user != null)
             {
-                // Navigera till RecipeListWindow eller visa meddelande
+                LoggedInUser = user;
+                // Navigera till receptfönster
             }
             else
             {
-                // Visa felmeddelande i UI
+                MessageBox.Show("Fel användarnamn eller lösenord.");
             }
+
         }
 
         private bool CanExecuteLogin()
