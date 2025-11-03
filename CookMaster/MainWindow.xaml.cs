@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace CookMaster
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private MainViewModel _viewModel;
@@ -26,5 +23,13 @@ namespace CookMaster
             DataContext = _viewModel;
         }
 
+        // Kopplar lösenord från PasswordBox till ViewModel
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel vm && sender is PasswordBox pb)
+            {
+                vm.Password = pb.Password;
+            }
+        }
     }
 }

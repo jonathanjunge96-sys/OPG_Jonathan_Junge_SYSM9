@@ -17,41 +17,41 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-
         </Grid.ColumnDefinitions>
 
         <!-- Innehåll i mitten av fönstret -->
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" 
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Width="300" Orientation="Vertical" Height="284">
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Width="300" Orientation="Vertical" Height="284">
 
             <!-- Användarnamn som jag binder -->
             <TextBlock Text="Användarnamn:" FontSize="18" Margin="0,0,0,5"/>
-            <TextBox Text="{Binding Username}" Height="30" Margin="0,0,0,10"/>
+            <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="0,0,0,10"/>
 
-            <!-- Lösenord som binds -->
+            <!-- Lösenord som binds via kod -->
             <TextBlock Text="Lösenord:" FontSize="18" Margin="0,0,0,5"/>
-            <PasswordBox Height="30" Margin="0,0,0,20"/>
+            <PasswordBox Height="30" Margin="0,0,0,20" PasswordChanged="PasswordBox_PasswordChanged"/>
 
             <!-- Logga in-knapp -->
             <Button x:Name="ForgotPw" 
                     Content="Glömt användarnamn eller lösenord?" Margin="5" Background="Orange"/>
             <Button x:Name="LogIn"
-                Content="Logga in"
-                Height="40" Background="Yellow" Margin="5"
-                FontSize="16" Command="{Binding LogIn}"/>
-            <Button  x:Name="Registre"
-                Content="Registrera ny användare"
-                Height="40" Background="Yellow" Margin="1"
-                FontSize="16" Command="{Binding LogIn}"/>
+                    Content="Logga in"
+                    Height="40" Background="Yellow" Margin="5"
+                    FontSize="16" Command="{Binding LogIn}"/>
+            <Button x:Name="Registre"
+                    Content="Registrera ny användare"
+                    Height="40" Background="Yellow" Margin="1"
+                    FontSize="16" />
         </StackPanel>
     </Grid>
+
+
 
 </Window>

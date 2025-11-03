@@ -10,42 +10,64 @@ using System.Windows.Input;
 
 namespace CookMaster.ViewModels
 {
-    internal class MainViewModel : ObservableObject
+    public class MainViewModel : ObservableObject
     {
-        public string? Username { get; set; }
-        public string? Password { get; set; }
-        public ICommand? LogIn { get; set; }
-        private readonly UserManager? _userManager;
-        public User? LoggedInUser { get; private set; } //egenskaper för niloggad användare
+        private string? _username;
+        public string? Username //egenskap för användarnamn
+        {
+            get => _username;
+            set
+            {
+                _username = value; //uppdaterar värde från UI
+                OnPropertyChanged(nameof(Username)); //meddelar UI
+            }
+        }
 
+        private string? _password;
+        public string? Password //egenskap för lösenord
+        {
+            get => _password;
+            set
+            {
+                _password = value; //uppdaterar värde från UI
+                OnPropertyChanged(nameof(Password)); //meddelar UI
+            }
+        }
+
+        public ICommand? LogIn { get; set; }
+        private readonly UserManager _userManager;
+        public User? LoggedInUser { get; private set; } //egenskaper för niloggad användare
 
         public MainViewModel()
         {
             _userManager = new UserManager();
-
-            LogIn = new RelayCommand(ExecuteLogin, CanExecuteLogin);
+            LogIn = new RelayCommand(ExecuteLogin);
         }
 
         private void ExecuteLogin()
         {
-            var user = _userManager.LoginUser(Username!, Password!);
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                MessageBox.Show("Fyll i både användarnamn och lösenord.");
+                return;
+            }
+
+            var user = _userManager.LoginUser(Username, Password);
             if (user != null)
             {
                 LoggedInUser = user;
+                MessageBox.Show($"Inloggning lyckades! Välkommen {user.Username}");
                 // Navigera till receptfönster
             }
             else
             {
                 MessageBox.Show("Fel användarnamn eller lösenord.");
             }
-
         }
 
-        private bool CanExecuteLogin()
-        {
-            return !string.IsNullOrWhiteSpace(Username) && !string.IsNullOrWhiteSpace(Password);
-        }
     }
+
+
 
 }
 
