@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel;
 using CookMaster.Models;
+using CookMaster.ViewModels;
 
 namespace CookMaster.Managers
 {
 
-    public class UserManager : INotifyPropertyChanged //Hanterar inlog, utlog, reg, currentusr, och meddelar UI om ändringar
+    public class UserManager : ObservableObject //Hanterar inlog, utlog, reg, currentusr, och meddelar UI om ändringar
     {
         private readonly List<User> _users = new List<User>(); //lista som lagrar användare, ska bara gå att lägga till för användaren
 
@@ -37,11 +38,7 @@ namespace CookMaster.Managers
             return user;
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        
 
         public bool Register(string username, string password, string country)
         {
