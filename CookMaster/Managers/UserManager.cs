@@ -28,7 +28,7 @@ namespace CookMaster.Managers
 
         public UserManager()
         {
-            var user = new User
+            var user = new User //en standardanvändare
             {
                 Username = "Jonte",
                 Password = "1234",
@@ -42,7 +42,7 @@ namespace CookMaster.Managers
                 DateCreated = DateTime.Now,
                 Author = user
             });
-            _users.Add(user);
+            _users.Add(user); //standard admin
 
             var admin = new AdminUser
             {
@@ -63,7 +63,7 @@ namespace CookMaster.Managers
             return user;
         }
 
-        public bool Register(string username, string password, string country)
+        public bool Register(string username, string password, string country, string securityAnswer)
         {
             if (_users.Any(u => u.Username == username))
                 return false;
@@ -72,7 +72,8 @@ namespace CookMaster.Managers
             {
                 Username = username,
                 Password = password,
-                Country = country
+                Country = country,
+                SecurityAnswer = securityAnswer //lagty till i basklass, slutar klaga
             };
 
             _users.Add(newUser);

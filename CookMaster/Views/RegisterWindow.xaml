@@ -1,0 +1,24 @@
+﻿<Window x:Class="CookMaster.Views.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Registrera användare" Height="400" Width="400">
+    <Grid Margin="35">
+        <StackPanel>
+            <TextBlock Text="Önskat användarnamn:" FontSize="16"/>
+            <TextBox Text="{Binding NewUsername, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+
+            <TextBlock Text="Önskat lösenord:" FontSize="16"/>
+            <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Margin="0,5"/>
+
+            <TextBlock Text="Land:" FontSize="16"/>
+            <TextBox Text="{Binding NewCountry, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+
+            <TextBlock Text="Säkerhetsfråga: Vad är din mammas mellannamn?" FontSize="16" TextWrapping="Wrap"/>
+            <TextBox Text="{Binding SecurityAnswer, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+
+
+
+            <Button Content="Registrera" Command="{Binding RegisterCommand}" Margin="0,10" Background="LightGreen"/>
+        </StackPanel>
+    </Grid>
+</Window>
