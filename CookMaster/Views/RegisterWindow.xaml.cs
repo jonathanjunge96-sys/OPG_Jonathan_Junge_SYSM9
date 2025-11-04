@@ -19,6 +19,14 @@ namespace CookMaster.Views
                 vm.NewPassword = pb.Password;
             }
         }
+        private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e) //dubbelkontroll på lösenord
+        {
+            if (DataContext is RegisterViewModel vm && sender is PasswordBox pb)
+            {
+                vm.ConfirmPassword = pb.Password;
+            }
+        }
+
     }
 }
 

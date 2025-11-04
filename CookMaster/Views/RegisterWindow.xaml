@@ -1,7 +1,7 @@
 ﻿<Window x:Class="CookMaster.Views.RegisterWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Registrera användare" Height="400" Width="400">
+        Title="Registrera användare" Height="500" Width="400">
     <Grid Margin="35">
         <StackPanel>
             <TextBlock Text="Önskat användarnamn:" FontSize="16"/>
@@ -9,9 +9,15 @@
 
             <TextBlock Text="Önskat lösenord:" FontSize="16"/>
             <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Margin="0,5"/>
+            <TextBlock Text="Bekräfta lösenord:" FontSize="16"/>
+            <PasswordBox PasswordChanged="ConfirmPasswordBox_PasswordChanged" Margin="0,5"/>
+
 
             <TextBlock Text="Land:" FontSize="16"/>
-            <TextBox Text="{Binding NewCountry, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+            <ComboBox ItemsSource="{Binding Countries}"
+          SelectedItem="{Binding NewCountry, Mode=TwoWay}"
+          Width="auto" Height="auto" Margin="0,5"/>
+
 
             <TextBlock Text="Säkerhetsfråga: Vad är din mammas mellannamn?" FontSize="16" TextWrapping="Wrap"/>
             <TextBox Text="{Binding SecurityAnswer, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>

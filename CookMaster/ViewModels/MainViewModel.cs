@@ -1,5 +1,6 @@
 ﻿using CookMaster.Managers;
 using CookMaster.Models;
+using CookMaster.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +58,12 @@ namespace CookMaster.ViewModels
             {
                 LoggedInUser = user;
                 MessageBox.Show($"Inloggning lyckades! Välkommen {user.Username}");
-                // Navigera till receptfönster
+                // Öppna RecipeWindow
+                var recipeWindow = new RecipeWindow();
+                recipeWindow.Show();
+
+                // Stäng MainWindow
+                Application.Current.Windows.OfType<MainWindow>().FirstOrDefault()?.Close();
             }
             else
             {

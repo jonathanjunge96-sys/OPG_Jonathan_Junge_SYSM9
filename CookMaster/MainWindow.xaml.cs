@@ -1,4 +1,5 @@
 ﻿using CookMaster.ViewModels;
+using CookMaster.Views;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,7 @@ namespace CookMaster
             DataContext = _viewModel;
         }
 
-        // Kopplar lösenord från PasswordBox till ViewModel
+        //kopplar lösenord från Passwordbox till Viewmodel
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is MainViewModel vm && sender is PasswordBox pb)
@@ -31,5 +32,14 @@ namespace CookMaster
                 vm.Password = pb.Password;
             }
         }
+
+        private void Registre_Click(object sender, RoutedEventArgs e)
+        {
+            var registerWindow = new RegisterWindow();
+            registerWindow.Show();
+            this.Close();
+        }
+
+
     }
 }

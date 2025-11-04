@@ -1,5 +1,4 @@
-﻿using CookMaster.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +15,13 @@ using System.Windows.Shapes;
 namespace CookMaster.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for RecipeWindow.xaml
     /// </summary>
-    public partial class LoginView : UserControl
+    public partial class RecipeWindow : Window
     {
-        public LoginView()
+        public RecipeWindow()
         {
             InitializeComponent();
-            DataContext = new LogInViewModel();
         }
     }
 }
