@@ -1,11 +1,8 @@
 ﻿using CookMaster.Managers;
 using CookMaster.Views;
+using CookMaster.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,25 +10,25 @@ namespace CookMaster.ViewModels
 {
     public class LogInViewModel : ObservableObject
     {
-        private string _username = string.Empty; // lagrar här
-        public string Username // tillgänglig utifrån
+        private string _username = string.Empty;
+        public string Username
         {
             get => _username;
             set
             {
-                _username = value; // uppdaterar värde från UI
-                OnPropertyChanged(nameof(Username)); // meddelar UI
+                _username = value;
+                OnPropertyChanged();
             }
         }
 
-        private string _password = string.Empty; // samma princip som ovan
+        private string _password = string.Empty;
         public string Password
         {
             get => _password;
             set
             {
                 _password = value;
-                OnPropertyChanged(nameof(Password));
+                OnPropertyChanged();
             }
         }
 
@@ -45,7 +42,7 @@ namespace CookMaster.ViewModels
             LogInCommand = new RelayCommand(ExecuteLogin);
         }
 
-        private void ExecuteLogin()
+        private void ExecuteLogin(object obj) 
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
@@ -58,11 +55,9 @@ namespace CookMaster.ViewModels
             {
                 MessageBox.Show($"Inloggning lyckades! Välkommen {user.Username}");
 
-                // Öppna RecipeWindow
-                var recipeWindow = new RecipeListWindow();
-                recipeWindow.Show();
+                var recipeListWindow = new RecipeListWindow(user, _userManager);
+                recipeListWindow.Show();
 
-                // Stäng loginfönstret
                 Application.Current.Windows.OfType<Window>()
                     .FirstOrDefault(w => w.DataContext == this)?.Close();
             }
@@ -72,15 +67,17 @@ namespace CookMaster.ViewModels
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

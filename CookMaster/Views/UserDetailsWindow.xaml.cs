@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CookMaster.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CookMaster.Views
+namespace CookMaster.Views // eller din namespace
 {
-    /// <summary>
-    /// Interaction logic for UserDetailsWindow.xaml
-    /// </summary>
-    public partial class UserDetailsWindow : Window
-    {
-        public UserDetailsWindow()
-        {
-            InitializeComponent();
-        }
+    public partial class RecipeDetailWindow : Window
+    { 
+
     }
+        
 }
+

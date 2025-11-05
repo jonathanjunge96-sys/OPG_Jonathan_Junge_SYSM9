@@ -1,15 +1,10 @@
 ﻿using CookMaster.Managers;
 using CookMaster.Models;
-using CookMaster.ViewModels;
-using System;
-using System.Collections.Generic;
+using CookMaster.Views;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using CookMaster.Views;
 
 namespace CookMaster.ViewModels
 {
@@ -70,13 +65,13 @@ namespace CookMaster.ViewModels
             }
         }
 
-        private void OpenAddRecipeWindow()
+        private void OpenAddRecipeWindow(object obj)
         {
             var addWindow = new AddRecipeWindow();
             addWindow.Show();
         }
 
-        private void OpenRecipeDetails()
+        private void OpenRecipeDetails(object obj)
         {
             if (SelectedRecipe == null)
             {
@@ -84,11 +79,13 @@ namespace CookMaster.ViewModels
                 return;
             }
 
-            var detailWindow = new RecipeDetailWindow(SelectedRecipe);
+            var detailWindow = new RecipeDetailWindow();
+            detailWindow.DataContext = SelectedRecipe;
             detailWindow.Show();
+
         }
 
-        private void RemoveSelectedRecipe()
+        private void RemoveSelectedRecipe(object obj)
         {
             if (SelectedRecipe == null)
             {
@@ -97,16 +94,16 @@ namespace CookMaster.ViewModels
             }
 
             Recipes.Remove(SelectedRecipe);
-            SelectedRecipe.Author.Recipes.Remove(SelectedRecipe); // tar bort från användarens lista också
+            SelectedRecipe.Author.Recipes.Remove(SelectedRecipe);
         }
 
-        private void OpenUserDetails()
+        private void OpenUserDetails(object obj)
         {
             var userWindow = new UserDetailsWindow();
             userWindow.Show();
         }
 
-        private void SignOut()
+        private void SignOut(object obj)
         {
             var mainWindow = new MainWindow();
             mainWindow.Show();
@@ -115,10 +112,11 @@ namespace CookMaster.ViewModels
                 .FirstOrDefault(w => w.DataContext == this)?.Close();
         }
 
-        private void ShowAppInfo()
+        private void ShowAppInfo(object obj)
         {
             MessageBox.Show("CookMaster är en receptplattform där du kan spara, visa och dela dina favoriträtter.");
         }
     }
 }
+
 

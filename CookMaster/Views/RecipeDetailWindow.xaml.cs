@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using CookMaster.ViewModels;
+
 
 namespace CookMaster.Views
 {
@@ -20,11 +22,23 @@ namespace CookMaster.Views
     /// </summary>
     public partial class RecipeDetailWindow : Window
     {
+        private Recipe _recipe;
+
         public RecipeDetailWindow(Recipe recipe)
         {
             InitializeComponent();
-            DataContext = recipe;
+            _recipe = recipe;
+
+            DataContext = _recipe;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+
+        }
     }
+
+
+
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CookMaster.Models
 {
-    public class Recipe
+    public class Recipe : ObservableObject
     {
         public string Name { get; set; }
         public string Ingredients { get; set; } 
@@ -14,7 +14,10 @@ namespace CookMaster.Models
         public string Category { get; set; } //deklarear strings för receptegenskaper
         public DateTime DateCreated { get; set; } 
         public User Author { get; set; }
-        
+
+       
+
+
 
 
         public void EditRecipe(string name, string ingredients, string instructions, string category)  //offentlig metod som ta emot fyra parametrar

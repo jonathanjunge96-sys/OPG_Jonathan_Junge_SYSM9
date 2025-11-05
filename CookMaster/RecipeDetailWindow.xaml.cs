@@ -1,7 +1,4 @@
-﻿using CookMaster.Managers;
-using CookMaster.Models;
-using CookMaster.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CookMaster.Views
+namespace CookMaster
 {
-    public partial class RecipeListWindow : Window
+    /// <summary>
+    /// Interaction logic for RecipeDetailWindow.xaml
+    /// </summary>
+    public partial class RecipeDetailWindow : Window
     {
-        public RecipeListWindow(User currentUser, UserManager userManager)
+        public RecipeDetailWindow()
         {
             InitializeComponent();
-            DataContext = new RecipeListViewModel(currentUser, userManager);
         }
     }
 }
-

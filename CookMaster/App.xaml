@@ -4,7 +4,7 @@
              xmlns:managers="clr-namespace:CookMaster.Managers"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <managers:UserManager x:Key="UserManager" />
+        
     </Application.Resources>
 </Application>
 

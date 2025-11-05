@@ -45,7 +45,7 @@ namespace CookMaster.ViewModels
             LogIn = new RelayCommand(ExecuteLogin);
         }
 
-        private void ExecuteLogin()
+        private void ExecuteLogin(object obj)
         {
             if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
             {
@@ -59,7 +59,7 @@ namespace CookMaster.ViewModels
                 LoggedInUser = user;
                 MessageBox.Show($"Inloggning lyckades! Välkommen {user.Username}");
                 // Öppna RecipeWindow
-                var recipeWindow = new RecipeListWindow();
+                var recipeWindow = new RecipeListWindow(user, _userManager);
                 recipeWindow.Show();
 
                 // Stäng MainWindow
