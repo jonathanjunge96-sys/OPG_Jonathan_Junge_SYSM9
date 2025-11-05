@@ -59,7 +59,7 @@ namespace CookMaster.ViewModels
                 LoggedInUser = user;
                 MessageBox.Show($"Inloggning lyckades! Välkommen {user.Username}");
                 // Öppna RecipeWindow
-                var recipeWindow = new RecipeWindow();
+                var recipeWindow = new RecipeListWindow();
                 recipeWindow.Show();
 
                 // Stäng MainWindow
