@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CookMaster.Views;
 using System.Collections.Generic;
 using System.ComponentModel;
 using CookMaster.Models;
@@ -13,6 +13,8 @@ namespace CookMaster.Managers
 {
     public class UserManager : ObservableObject
     {
+        public List<User> Users => _users; //görs tillgäniglig i andra klasser
+
         private readonly List<User> _users = new List<User>();
         private User? _currentUser;
 
