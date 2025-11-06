@@ -8,7 +8,7 @@ namespace CookMaster.Managers
 {
     public class UserManager : ObservableObject
     {
-        public List<User> Users => _users;
+        public List<User> Users => _users; //lista med användare
 
         private readonly List<User> _users = new List<User>();
         private User? _currentUser;
@@ -31,7 +31,7 @@ namespace CookMaster.Managers
                 Password = "1234",
                 Country = "Sweden"
             };
-            user.Recipes.Add(new Recipe
+            user.Recipes.Add(new Recipe //förprogrammerat recept
             {
                 Name = "Stuvade makaroner",
                 Ingredients = "Mjölk, makaroner, muskotnöt",
@@ -41,7 +41,7 @@ namespace CookMaster.Managers
             });
             _users.Add(user);
 
-            var admin = new AdminUser
+            var admin = new AdminUser //förprogrammerad admin
             {
                 Username = "admin",
                 Password = "admin",
@@ -87,31 +87,17 @@ namespace CookMaster.Managers
                 Country = country,
                 SecurityAnswer = securityAnswer
             };
-            newUser.Recipes.Add(new Recipe
-            {
-                Name = "Pannkakor",
-                Ingredients = "Mjöl, mjölk, ägg, salt, smör",
-                Category = "Frukost",
-                DateCreated = DateTime.Now,
-                Author = newUser
-            });
-
-            newUser.Recipes.Add(new Recipe //lägger till receptmall för newUser
-            {
-                Name = "Köttfärssås",
-                Ingredients = "Köttfärs, tomatpuré, lök, vitlök, kryddor",
-                Category = "Middag",
-                DateCreated = DateTime.Now,
-                Author = newUser
-            });
-
-
+            
             _users.Add(newUser);
 
             Console.WriteLine($"[Register] Registrerad ny användare: {newUser.Username} / {newUser.Password}");
             Console.WriteLine($"[Register] Totalt antal användare: {_users.Count}");
 
             return true;
+
+           
+
+
         }
     }
 }

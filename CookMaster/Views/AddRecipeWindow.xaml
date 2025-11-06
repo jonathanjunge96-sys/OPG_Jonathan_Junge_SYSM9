@@ -38,7 +38,7 @@
 
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
             <Button Content="Spara" Command="{Binding SaveCommand}" Width="100" Margin="10"/>
-            <Button Content="Avbryt" Command="{Binding CancelCommand}" Width="100" Margin="10"/>
+            
         </StackPanel>
     </Grid>
 </Window>

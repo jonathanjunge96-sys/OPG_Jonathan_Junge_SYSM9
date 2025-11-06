@@ -58,8 +58,6 @@ namespace CookMaster.ViewModels
 
         public ObservableCollection<string> Categories { get; set; }
 
-        public static ObservableCollection<Recipe> SavedRecipes { get; set; } = new ObservableCollection<Recipe>();
-
         // Kommandon
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
@@ -84,31 +82,39 @@ namespace CookMaster.ViewModels
         // Spara recept
         private void SaveRecipe(object obj)
         {
-            if (string.IsNullOrWhiteSpace(Name) ||
-                string.IsNullOrWhiteSpace(Ingredients) ||
-                string.IsNullOrWhiteSpace(Instructions) ||
-                string.IsNullOrWhiteSpace(SelectedCategory))
+            try
             {
-                Message = "Fyll i alla fält!";
-                return;
+                if (string.IsNullOrWhiteSpace(Name) ||
+                    string.IsNullOrWhiteSpace(Ingredients) ||
+                    string.IsNullOrWhiteSpace(Instructions) ||
+                    string.IsNullOrWhiteSpace(SelectedCategory))
+                {
+                    Message = "Fyll i alla fält!";
+                    return;
+                }
+
+                var newRecipe = new Recipe
+                {
+                    Name = Name,
+                    Ingredients = Ingredients,
+                    Instructions = Instructions,
+                    Category = SelectedCategory,
+                    DateCreated = SelectedDate ?? DateTime.Today,
+                    Author = _currentUser
+                };
+
+                _currentUser.Recipes.Add(newRecipe);         
+                _onRecipeSaved?.Invoke(newRecipe);           
+
+                Message = "Recept sparat!";
+                ClearFields();
             }
-
-            var newRecipe = new Recipe
+            catch (Exception ex)
             {
-                Name = Name,
-                Ingredients = Ingredients,
-                Instructions = Instructions,
-                Category = SelectedCategory,
-                DateCreated = SelectedDate ?? DateTime.Today,
-                Author = _currentUser
-            };
-
-            SavedRecipes.Add(newRecipe);
-            _onRecipeSaved?.Invoke(newRecipe); // ✅ Skicka tillbaka till huvudlistan
-
-            Message = "Recept sparat!";
-            ClearFields();
+                MessageBox.Show($"Fel vid sparning: {ex.Message}", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         // Rensar fälten men behåller dagens datum
         private void ClearFields()

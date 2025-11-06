@@ -36,6 +36,7 @@ namespace CookMaster.ViewModels
 
         public RecipeListViewModel(User currentUser, UserManager userManager)
         {
+            _currentUser = currentUser;
             LoggedInUsername = currentUser.Username;
             IsAdmin = currentUser is AdminUser;
             _userManager = userManager;
@@ -47,10 +48,10 @@ namespace CookMaster.ViewModels
             SignOutCommand = new RelayCommand(SignOut);
             ShowInfoCommand = new RelayCommand(ShowAppInfo);
 
-            LoadRecipes(currentUser);
+            LoadRecipes();
         }
 
-        private void LoadRecipes(User currentUser)
+        private void LoadRecipes()
         {
             Recipes.Clear();
 
@@ -58,11 +59,11 @@ namespace CookMaster.ViewModels
             {
                 foreach (var recipe in user.Recipes)
                 {
-                    Recipes.Add(recipe); //gör recept synligt för alla  
+                    Recipes.Add(recipe);
                 }
             }
-
         }
+
 
 
         private void OpenAddRecipeWindow(object obj)
@@ -99,9 +100,51 @@ namespace CookMaster.ViewModels
                 return;
             }
 
-            Recipes.Remove(SelectedRecipe);
-            SelectedRecipe.Author.Recipes.Remove(SelectedRecipe);
+            try
+            {
+                // ADMIN: får ta bort recept från alla användare
+                if (IsAdmin)
+                {
+                    foreach (var user in _userManager.Users)
+                    {
+                        if (user.Recipes.Contains(SelectedRecipe))
+                        {
+                            user.Recipes.Remove(SelectedRecipe);
+                        }
+                    }
+
+                    Recipes.Remove(SelectedRecipe);
+                    LoadRecipes(); // 🔄 uppdatera UI
+                    MessageBox.Show("Recept borttaget för alla användare.");
+                    return;
+                }
+
+                
+                if (SelectedRecipe.Author != _currentUser)
+                {
+                    MessageBox.Show("Du kan endast ta bort dina egna recept.");
+                    return;
+                }
+
+                _currentUser.Recipes.Remove(SelectedRecipe);
+                Recipes.Remove(SelectedRecipe);
+                LoadRecipes(); // 🔄 uppdatera UI
+                MessageBox.Show("Ditt recept har tagits bort.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Fel vid borttagning: {ex.Message}", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
+
+
+
+
+
+
+
+
 
         private void OpenUserDetails(object obj)
         {

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CookMaster.Models;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,22 +15,24 @@ namespace CookMaster.Models
         public string? Country { get; set; }
         public string? SecurityAnswer { get; set; }
 
-        public List<Recipe> Recipes { get; set; } = new();
-
+        public ObservableCollection<Recipe> Recipes { get; set; } = new();
     }
 
-    public class AdminUser : User
+
+}
+
+public class AdminUser : User
+{
+    public void RemoveAnyRecipe(Recipe recipe, IEnumerable<User> allUsers)
     {
-        public void RemoveAnyRecipe(Recipe recipe, List<User> allUsers)
+        foreach (var user in allUsers)
         {
-            foreach (var user in allUsers)
+            if (user.Recipes.Contains(recipe))
             {
-                if (user.Recipes.Contains(recipe))      
-                {
-                    user.Recipes.Remove(recipe);
-                    break; // Om receptet bara finns hos en användare
-                }
+                user.Recipes.Remove(recipe);
+                break; 
             }
         }
     }
 }
+
