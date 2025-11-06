@@ -22,10 +22,10 @@ namespace CookMaster.Views
     /// </summary>
     public partial class RecipeDetailWindow : Window
     {
-        public RecipeDetailWindow(Recipe recipe)
+        public RecipeDetailWindow(Recipe recipe, User currentUser)
         {
             InitializeComponent();
-            DataContext = new RecipeDetailViewModel(recipe);
+            DataContext = new RecipeDetailViewModel(recipe, currentUser);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -1,35 +1,60 @@
 ﻿<Window x:Class="CookMaster.Views.UserDetailsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CookMaster.Views"
-        mc:Ignorable="d"
-        Title="UserDetailsWindow" Height="450" Width="800">
+        Title="Användarinställningar" Height="350" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
-        <StackPanel>
-            <TextBlock Text="Användarinformation" FontSize="22" FontWeight="Bold" Margin="0,0,0,20"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Användarnamn:" FontWeight="SemiBold" Width="120"/>
-                <TextBlock Text="{Binding Username}"/>
-            </StackPanel>
+        <!-- Nuvarande användarnamn och land -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Nuvarande användarnamn: " FontWeight="Bold"/>
+            <TextBlock Text="{Binding CurrentUsername}" Foreground="DarkBlue"/>
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Fullständigt namn:" FontWeight="SemiBold" Width="120"/>
-                <TextBlock Text="{Binding FullName}"/>
-            </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Nuvarande land: " FontWeight="Bold"/>
+            <TextBlock Text="{Binding CurrentCountry}" Foreground="DarkGreen"/>
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="E-post:" FontWeight="SemiBold" Width="120"/>
-                <TextBlock Text="{Binding Email}"/>
-            </StackPanel>
+        
+        <StackPanel Grid.Row="2" Margin="0,0,0,10">
+            <TextBlock Text="Nytt användarnamn:"/>
+            <TextBox Text="{Binding NewUsername}" />
+        </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5">
-                <TextBlock Text="Medlem sedan:" FontWeight="SemiBold" Width="120"/>
-                <TextBlock Text="{Binding DateJoined, StringFormat='{}{0:yyyy-MM-dd}'}"/>
-            </StackPanel>
+        <!-- Nytt lösenord -->
+        <StackPanel Grid.Row="3" Margin="0,0,0,10">
+            <TextBlock Text="Nytt lösenord:"/>
+            <PasswordBox x:Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged"/>
+        </StackPanel>
+
+        
+        <StackPanel Grid.Row="4" Margin="0,0,0,10">
+            <TextBlock Text="Bekräfta lösenord:"/>
+            <PasswordBox x:Name="ConfirmBox" PasswordChanged="ConfirmBox_PasswordChanged"/>
+        </StackPanel>
+
+        
+        <StackPanel Grid.Row="5" Margin="0,0,0,10">
+            <TextBlock Text="Land:"/>
+            <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}" />
+        </StackPanel>
+
+        
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Spara" Command="{Binding SaveCommand}" Margin="5"/>
+            <Button Content="Avbryt" Command="{Binding CancelCommand}" Margin="5"/>
         </StackPanel>
     </Grid>
-
 </Window>
+

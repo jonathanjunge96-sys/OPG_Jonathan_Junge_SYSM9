@@ -84,7 +84,7 @@ namespace CookMaster.ViewModels
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(Name) ||
+                if (string.IsNullOrWhiteSpace(Name) || //fel om fält är tomma
                     string.IsNullOrWhiteSpace(Ingredients) ||
                     string.IsNullOrWhiteSpace(Instructions) ||
                     string.IsNullOrWhiteSpace(SelectedCategory))
@@ -93,15 +93,16 @@ namespace CookMaster.ViewModels
                     return;
                 }
 
-                var newRecipe = new Recipe
+                var newRecipe = new Recipe //egenskaper för nytt recept
                 {
                     Name = Name,
-                    Ingredients = Ingredients,
+                    Ingredients = Ingredients.Split(',').Select(i => i.Trim()).ToList(),//konverterar till lista
                     Instructions = Instructions,
                     Category = SelectedCategory,
                     DateCreated = SelectedDate ?? DateTime.Today,
                     Author = _currentUser
                 };
+
 
                 _currentUser.Recipes.Add(newRecipe);         
                 _onRecipeSaved?.Invoke(newRecipe);           
@@ -116,8 +117,8 @@ namespace CookMaster.ViewModels
         }
 
 
-        // Rensar fälten men behåller dagens datum
-        private void ClearFields()
+        //rensar fälten men behåller dagens datum
+        private void ClearFields() 
         {
             Name = "";
             Ingredients = "";
@@ -126,7 +127,7 @@ namespace CookMaster.ViewModels
             SelectedDate = DateTime.Today;
         }
 
-        // Stänger fönstret
+        //stäng
         private void Cancel(object obj)
         {
             if (obj is Window window)

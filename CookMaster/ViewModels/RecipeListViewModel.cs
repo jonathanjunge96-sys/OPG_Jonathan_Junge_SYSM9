@@ -86,7 +86,7 @@ namespace CookMaster.ViewModels
                 return;
             }
 
-            var detailWindow = new RecipeDetailWindow(SelectedRecipe);
+            var detailWindow = new RecipeDetailWindow(SelectedRecipe, _currentUser);
             detailWindow.Show();
         }
 
@@ -102,7 +102,7 @@ namespace CookMaster.ViewModels
 
             try
             {
-                // ADMIN: får ta bort recept från alla användare
+               
                 if (IsAdmin)
                 {
                     foreach (var user in _userManager.Users)
@@ -114,7 +114,7 @@ namespace CookMaster.ViewModels
                     }
 
                     Recipes.Remove(SelectedRecipe);
-                    LoadRecipes(); // 🔄 uppdatera UI
+                    LoadRecipes();
                     MessageBox.Show("Recept borttaget för alla användare.");
                     return;
                 }
@@ -128,7 +128,7 @@ namespace CookMaster.ViewModels
 
                 _currentUser.Recipes.Remove(SelectedRecipe);
                 Recipes.Remove(SelectedRecipe);
-                LoadRecipes(); // 🔄 uppdatera UI
+                LoadRecipes();
                 MessageBox.Show("Ditt recept har tagits bort.");
             }
             catch (Exception ex)
@@ -148,9 +148,10 @@ namespace CookMaster.ViewModels
 
         private void OpenUserDetails(object obj)
         {
-            var userWindow = new UserDetailsWindow();
+            var userWindow = new UserDetailsWindow(_currentUser, _userManager);
             userWindow.Show();
         }
+
 
         private void SignOut(object obj)
         {

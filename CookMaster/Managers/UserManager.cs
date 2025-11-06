@@ -34,11 +34,12 @@ namespace CookMaster.Managers
             user.Recipes.Add(new Recipe //förprogrammerat recept
             {
                 Name = "Stuvade makaroner",
-                Ingredients = "Mjölk, makaroner, muskotnöt",
+                Ingredients = new List<string> { "Mjölk", "makaroner", "muskotnöt" }, //gör till lista
                 Category = "Middag",
                 DateCreated = DateTime.Now,
                 Author = user
             });
+
             _users.Add(user);
 
             var admin = new AdminUser //förprogrammerad admin

@@ -1,28 +1,44 @@
 ﻿<Window x:Class="CookMaster.Views.RecipeDetailWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Receptdetaljer" Height="500" Width="600"
+        Title="Receptdetaljer" Height="600" Width="600"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
         <StackPanel>
-            <TextBlock Text="{Binding Recipe.Name}" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
 
+            
+            <TextBlock Text="Titel:" FontWeight="SemiBold"/>
+            <TextBox Text="{Binding Title}" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+            
             <TextBlock Text="Kategori:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Recipe.Category}" Margin="0,0,0,10"/>
+            <TextBox Text="{Binding Category}" Margin="0,0,0,10"/>
 
+            
             <TextBlock Text="Ingredienser:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Recipe.Ingredients}" TextWrapping="Wrap" Margin="0,0,0,10"/>
+            <ListBox ItemsSource="{Binding Ingredients}" Height="100" Margin="0,0,0,10"/>
+            <TextBox Text="{Binding NewIngredient}" Width="200" Margin="0,0,0,5"/>
+            <Button Content="Lägg till ingrediens" Command="{Binding AddIngredientCommand}" Width="150" Margin="0,0,0,10"/>
 
             <TextBlock Text="Instruktioner:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Recipe.Instructions}" TextWrapping="Wrap" Margin="0,0,0,10"/>
+            <TextBox Text="{Binding Instructions}" AcceptsReturn="True" Height="100" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
+            
+            <TextBlock Text="Beskrivning:" FontWeight="SemiBold"/>
+            <TextBox Text="{Binding Description}" AcceptsReturn="True" Height="60" TextWrapping="Wrap" Margin="0,0,0,10"/>
+
+            <!-- Metadata -->
             <TextBlock Text="Skapat:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Recipe.DateCreated, StringFormat='{}{0:yyyy-MM-dd}'}" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding DateCreated, StringFormat='{}{0:yyyy-MM-dd}'}" Margin="0,0,0,10"/>
 
             <TextBlock Text="Författare:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Recipe.Author.Username}" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding AuthorName}" Margin="0,0,0,10"/>
 
-            <Button Content="Stäng" Width="100" Margin="0,20,0,0" HorizontalAlignment="Left" Click="Button_Click"/>
+            <!-- Knapp för att spara -->
+            <Button Content="Spara ändringar" Command="{Binding SaveCommand}" Width="150" Margin="0,20,0,0"/>
+
+            <!-- Stäng-knapp -->
+            <Button Content="Stäng" Width="100" Margin="10,10,0,0" HorizontalAlignment="Left" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>
