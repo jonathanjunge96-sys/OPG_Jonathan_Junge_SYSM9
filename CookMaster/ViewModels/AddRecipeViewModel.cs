@@ -17,7 +17,9 @@ namespace CookMaster.ViewModels
         private DateTime? _selectedDate;
 
         private readonly User _currentUser;
+        private readonly Action<Recipe> _onRecipeSaved;
 
+        // Egenskaper
         public string Name
         {
             get => _name;
@@ -56,22 +58,24 @@ namespace CookMaster.ViewModels
 
         public ObservableCollection<string> Categories { get; set; }
 
-        
         public static ObservableCollection<Recipe> SavedRecipes { get; set; } = new ObservableCollection<Recipe>();
 
-        //kommandon
+        // Kommandon
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
         // Konstruktor
-        public AddRecipeWindowModel(User currentUser)
+        public AddRecipeWindowModel(User currentUser, Action<Recipe> onRecipeSaved)
         {
             _currentUser = currentUser;
+            _onRecipeSaved = onRecipeSaved;
 
             Categories = new ObservableCollection<string>
             {
                 "Frukost", "Lunch", "Middag", "Efterrätt", "Snacks"
             };
+
+            SelectedDate = DateTime.Today;
 
             SaveCommand = new RelayCommand(SaveRecipe);
             CancelCommand = new RelayCommand(Cancel);
@@ -83,8 +87,7 @@ namespace CookMaster.ViewModels
             if (string.IsNullOrWhiteSpace(Name) ||
                 string.IsNullOrWhiteSpace(Ingredients) ||
                 string.IsNullOrWhiteSpace(Instructions) ||
-                string.IsNullOrWhiteSpace(SelectedCategory) ||
-                SelectedDate == null)
+                string.IsNullOrWhiteSpace(SelectedCategory))
             {
                 Message = "Fyll i alla fält!";
                 return;
@@ -96,26 +99,28 @@ namespace CookMaster.ViewModels
                 Ingredients = Ingredients,
                 Instructions = Instructions,
                 Category = SelectedCategory,
-                DateCreated = SelectedDate.Value,
+                DateCreated = SelectedDate ?? DateTime.Today,
                 Author = _currentUser
             };
 
             SavedRecipes.Add(newRecipe);
+            _onRecipeSaved?.Invoke(newRecipe); // ✅ Skicka tillbaka till huvudlistan
+
             Message = "Recept sparat!";
             ClearFields();
         }
 
-        
+        // Rensar fälten men behåller dagens datum
         private void ClearFields()
         {
             Name = "";
             Ingredients = "";
             Instructions = "";
             SelectedCategory = null;
-            SelectedDate = null;
+            SelectedDate = DateTime.Today;
         }
 
-        
+        // Stänger fönstret
         private void Cancel(object obj)
         {
             if (obj is Window window)
@@ -125,6 +130,3 @@ namespace CookMaster.ViewModels
         }
     }
 }
-
-
-

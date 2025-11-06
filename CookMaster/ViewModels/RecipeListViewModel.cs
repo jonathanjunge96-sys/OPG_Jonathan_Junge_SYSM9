@@ -63,13 +63,19 @@ namespace CookMaster.ViewModels
             }
 
         }
-        
+
 
         private void OpenAddRecipeWindow(object obj)
         {
-            var addWindow = new AddRecipeWindow(_currentUser);
+            var addWindow = new AddRecipeWindow(_currentUser, AddRecipeToList);
             addWindow.Show();
         }
+
+        private void AddRecipeToList(Recipe recipe)
+        {
+            Recipes.Add(recipe); 
+        }
+
 
         private void OpenRecipeDetails(object obj)
         {

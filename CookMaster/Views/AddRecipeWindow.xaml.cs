@@ -6,12 +6,13 @@ namespace CookMaster.Views
 {
     public partial class AddRecipeWindow : Window
     {
-        public AddRecipeWindow(User currentUser)
+        public AddRecipeWindow(User currentUser, Action<Recipe> onRecipeSaved)
         {
             InitializeComponent();
-            DataContext = new AddRecipeWindowModel(currentUser);
+            DataContext = new AddRecipeWindowModel(currentUser, onRecipeSaved); // ✅ nu korrekt
         }
     }
+
 }
 
 
