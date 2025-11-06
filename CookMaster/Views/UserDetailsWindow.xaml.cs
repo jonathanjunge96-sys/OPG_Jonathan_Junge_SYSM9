@@ -13,10 +13,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CookMaster.Views // eller din namespace
+namespace CookMaster.Views 
 {
     public partial class RecipeDetailWindow : Window
     { 
+
+   
+    
 
     }
         

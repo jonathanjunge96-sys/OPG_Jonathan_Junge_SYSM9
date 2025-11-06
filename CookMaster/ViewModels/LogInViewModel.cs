@@ -34,11 +34,11 @@ namespace CookMaster.ViewModels
 
         public ICommand LogInCommand { get; }
 
-        private readonly UserManager _userManager;
+        private readonly UserManager _userManager = App.GlobalUserManager;
 
         public LogInViewModel()
         {
-            _userManager = new UserManager();
+           
             LogInCommand = new RelayCommand(ExecuteLogin);
         }
 

@@ -57,11 +57,12 @@ namespace CookMaster.ViewModels
 
         private readonly UserManager _userManager;
 
-        public RegisterViewModel()
+        public RegisterViewModel(UserManager userManager) 
         {
-            _userManager = new UserManager();
+            _userManager = userManager; 
             RegisterCommand = new RelayCommand(RegisterUser);
         }
+
 
         private void RegisterUser(object obj)
         {
@@ -77,7 +78,7 @@ namespace CookMaster.ViewModels
 
             if (NewPassword != ConfirmPassword)
             {
-                MessageBox.Show("Lösenorden matchar inte.");
+                MessageBox.Show("Lösenorden stämmer inte överens.");
                 return;
             }
 

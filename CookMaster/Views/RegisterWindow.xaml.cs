@@ -1,16 +1,19 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using CookMaster.Managers;
 using CookMaster.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace CookMaster.Views
 {
     public partial class RegisterWindow : Window
     {
-        public RegisterWindow()
+        public RegisterWindow(UserManager userManager)
         {
             InitializeComponent();
-            DataContext = new RegisterViewModel();
+            DataContext = new RegisterViewModel(userManager); 
         }
+        public RegisterWindow() : this(App.GlobalUserManager) { }
+
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {

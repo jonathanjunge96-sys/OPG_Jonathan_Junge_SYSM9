@@ -31,6 +31,8 @@ namespace CookMaster.ViewModels
         public ICommand ShowInfoCommand { get; }
 
         private readonly UserManager _userManager;
+        private readonly User _currentUser;
+
 
         public RecipeListViewModel(User currentUser, UserManager userManager)
         {
@@ -52,22 +54,20 @@ namespace CookMaster.ViewModels
         {
             Recipes.Clear();
 
-            if (IsAdmin)
+            foreach (var user in _userManager.Users)
             {
-                foreach (var user in _userManager.Users)
-                    foreach (var recipe in user.Recipes)
-                        Recipes.Add(recipe);
+                foreach (var recipe in user.Recipes)
+                {
+                    Recipes.Add(recipe); //gör recept synligt för alla  
+                }
             }
-            else
-            {
-                foreach (var recipe in currentUser.Recipes)
-                    Recipes.Add(recipe);
-            }
+
         }
+        
 
         private void OpenAddRecipeWindow(object obj)
         {
-            var addWindow = new AddRecipeWindow();
+            var addWindow = new AddRecipeWindow(_currentUser);
             addWindow.Show();
         }
 
@@ -75,15 +75,15 @@ namespace CookMaster.ViewModels
         {
             if (SelectedRecipe == null)
             {
-                MessageBox.Show("Vänligen markera ett recept först.");
+                MessageBox.Show("Välj ett recept först.");
                 return;
             }
 
-            var detailWindow = new RecipeDetailWindow();
-            detailWindow.DataContext = SelectedRecipe;
+            var detailWindow = new RecipeDetailWindow(SelectedRecipe);
             detailWindow.Show();
-
         }
+
+
 
         private void RemoveSelectedRecipe(object obj)
         {

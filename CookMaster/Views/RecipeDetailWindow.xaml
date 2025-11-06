@@ -5,25 +5,24 @@
         WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
         <StackPanel>
-            <TextBlock Text="{Binding Name}" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+            <TextBlock Text="{Binding Recipe.Name}" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
 
             <TextBlock Text="Kategori:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Category}" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding Recipe.Category}" Margin="0,0,0,10"/>
 
             <TextBlock Text="Ingredienser:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Ingredients}" TextWrapping="Wrap" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding Recipe.Ingredients}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
             <TextBlock Text="Instruktioner:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Instructions}" TextWrapping="Wrap" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding Recipe.Instructions}" TextWrapping="Wrap" Margin="0,0,0,10"/>
 
             <TextBlock Text="Skapat:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding DateCreated, StringFormat='{}{0:yyyy-MM-dd}'}" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding Recipe.DateCreated, StringFormat='{}{0:yyyy-MM-dd}'}" Margin="0,0,0,10"/>
 
             <TextBlock Text="Författare:" FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding Author.Username}" Margin="0,0,0,10"/>
+            <TextBlock Text="{Binding Recipe.Author.Username}" Margin="0,0,0,10"/>
 
             <Button Content="Stäng" Width="100" Margin="0,20,0,0" HorizontalAlignment="Left" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>
-

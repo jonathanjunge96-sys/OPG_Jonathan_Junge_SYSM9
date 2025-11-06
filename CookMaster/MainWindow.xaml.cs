@@ -1,45 +1,36 @@
 ﻿using CookMaster.ViewModels;
 using CookMaster.Views;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CookMaster
 {
     public partial class MainWindow : Window
     {
-        private MainViewModel _viewModel;
+        private LogInViewModel _viewModel;
 
         public MainWindow()
         {
             InitializeComponent();
-            _viewModel = new MainViewModel();
+            _viewModel = new LogInViewModel(); // ✅ rätt ViewModel
             DataContext = _viewModel;
         }
 
-        //kopplar lösenord från Passwordbox till Viewmodel
+        // Kopplar lösenord från PasswordBox till LogInViewModel
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (DataContext is MainViewModel vm && sender is PasswordBox pb)
+            if (DataContext is LogInViewModel vm && sender is PasswordBox pb)
             {
                 vm.Password = pb.Password;
             }
         }
 
+        // Öppnar registreringsfönstret med global UserManager
         private void Registre_Click(object sender, RoutedEventArgs e)
         {
-            var registerWindow = new RegisterWindow();
+            var registerWindow = new RegisterWindow(App.GlobalUserManager);
             registerWindow.Show();
             this.Close();
         }
-
-
     }
 }

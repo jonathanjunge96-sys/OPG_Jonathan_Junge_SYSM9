@@ -16,7 +16,8 @@ namespace CookMaster.ViewModels
         private string _selectedCategory;
         private DateTime? _selectedDate;
 
-        // Egenskaper
+        private readonly User _currentUser;
+
         public string Name
         {
             get => _name;
@@ -55,16 +56,18 @@ namespace CookMaster.ViewModels
 
         public ObservableCollection<string> Categories { get; set; }
 
-        // Lista med sparade recept
+        
         public static ObservableCollection<Recipe> SavedRecipes { get; set; } = new ObservableCollection<Recipe>();
 
-        // Kommandon
+        //kommandon
         public ICommand SaveCommand { get; }
         public ICommand CancelCommand { get; }
 
         // Konstruktor
-        public AddRecipeWindowModel()
+        public AddRecipeWindowModel(User currentUser)
         {
+            _currentUser = currentUser;
+
             Categories = new ObservableCollection<string>
             {
                 "Frukost", "Lunch", "Middag", "Efterrätt", "Snacks"
@@ -94,7 +97,7 @@ namespace CookMaster.ViewModels
                 Instructions = Instructions,
                 Category = SelectedCategory,
                 DateCreated = SelectedDate.Value,
-                Author = null // Du kan sätta aktuell användare här om du har en
+                Author = _currentUser
             };
 
             SavedRecipes.Add(newRecipe);
@@ -102,7 +105,7 @@ namespace CookMaster.ViewModels
             ClearFields();
         }
 
-        // Rensa fälten
+        
         private void ClearFields()
         {
             Name = "";
@@ -112,7 +115,7 @@ namespace CookMaster.ViewModels
             SelectedDate = null;
         }
 
-        // Avbryt
+        
         private void Cancel(object obj)
         {
             if (obj is Window window)
@@ -122,5 +125,6 @@ namespace CookMaster.ViewModels
         }
     }
 }
+
 
 
