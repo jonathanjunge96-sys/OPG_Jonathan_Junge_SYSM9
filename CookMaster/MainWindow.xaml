@@ -34,13 +34,12 @@
             <TextBlock Text="Användarnamn:" FontSize="18" Margin="0,0,0,5"/>
             <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" Height="30" Margin="0,0,0,10"/>
 
-            <!-- Lösenord -->
+           
             <TextBlock Text="Lösenord:" FontSize="18" Margin="0,0,0,5"/>
             <PasswordBox Height="30" Margin="0,0,0,20" PasswordChanged="PasswordBox_PasswordChanged"/>
 
-            <!-- Logga in-knapp -->
-            <Button x:Name="ForgotPw"  
-                    Content="Glömt användarnamn eller lösenord?" Margin="5" Background="Orange"/>
+           
+            
             <Button x:Name="LogIn"
                     Content="Logga in"
                     Height="40" Background="Yellow" Margin="5"

@@ -84,7 +84,7 @@ namespace CookMaster.ViewModels
             }
         }
 
-        private void SaveChanges(object obj) //metod för att spara ändringar
+        private void SaveChanges(object obj)
         {
             if (_recipe.Author != _currentUser)
             {
@@ -92,9 +92,29 @@ namespace CookMaster.ViewModels
                 return;
             }
 
-            _recipe.Ingredients = Ingredients.ToList(); //uppdaterar receptets ingredienser
+            //uppdaterarr ingredienser från textfältet
+            var lines = IngredientsText
+                .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(line => line.Trim())
+                .Where(line => !string.IsNullOrWhiteSpace(line))
+                .ToList();
+
+            _recipe.Ingredients = lines;
+
             MessageBox.Show("Receptet har uppdaterats.");
-            CloseAction?.Invoke(); //stänger fönstret
+            CloseAction?.Invoke();
         }
+
+        public string IngredientsText
+        {
+            get => string.Join(Environment.NewLine, Ingredients);
+            set
+            {
+                var lines = value.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                Ingredients = new ObservableCollection<string>(lines);
+                OnPropertyChanged(); //gör om till string
+            }
+        }
+
     }
 }
